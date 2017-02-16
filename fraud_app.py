@@ -78,4 +78,4 @@ if __name__ == '__main__':
     # Query data from MongoDB
     df = get_new_data()
     dat = plot_data(df)
-    app.run(host='0.0.0.0', port=PORT, threaded = True)
+    app.run(host='ec2-54-164-186-225.compute-1.amazonaws.com', port=PORT, threaded = True)
