@@ -20,7 +20,7 @@ Includes:
 '''
 
 app = Flask(__name__)
-PORT = 8080
+PORT = 8105
 
 def get_new_data():
     # time_threshold =
@@ -78,4 +78,4 @@ if __name__ == '__main__':
     # Query data from MongoDB
     df = get_new_data()
     dat = plot_data(df)
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=PORT, threaded = True)
