@@ -41,8 +41,8 @@ if __name__ == '__main__':
     url = 'http://galvanize-case-study-on-fraud.herokuapp.com/data_point'
 
     # loop to update database on timer
-    time_delta = 1 # seconds
-    for k in xrange(1):
+    time_delta = 5 # seconds
+    while True:
         # contact url
         response = urllib.urlopen(url)
         # put json data point into a dictionary
