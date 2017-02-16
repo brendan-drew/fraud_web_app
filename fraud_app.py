@@ -9,6 +9,14 @@ import time
 from datetime import datetime
 import os
 
+'''
+This file runs a flask app with the "Hello, World!" app and the fraud detection dashboard.
+Includes:
+- Function to get new data from the fraud_detections Mongo database
+- Function to add plots to our dashboard
+- Flask app for posting data to web
+'''
+
 app = Flask(__name__)
 PORT = 8080
 
@@ -28,14 +36,16 @@ def get_new_data():
 
 def plot_data(df):
     counts = df.groupby('fraud_prob').count()
+    labels = counts.index
     dat = counts.values
     fig, ax = plt.subplots(1)
-    ax.plot(dat)
-    ax.set_xlabel('Fraud Prob')
-    ax.set_ylabel('Count')
+    ax.bar(left = labels, height = dat)
+    ax.set_xlabel('Probability of Fraud')
+    ax.set_ylabel('Number of Events')
     fig.suptitle('Count of Events by Fraud Probability', fontsize = 16)
-    fig.savefig('images/temp_plot.png')
-    return fig
+    fig.savefig('static/temp_plot.png')
+    fig.show()
+    return dat
 
 @app.route('/')
 def index():
@@ -65,5 +75,5 @@ def say_hello():
 if __name__ == '__main__':
     # Query data from MongoDB
     df = get_new_data()
-    fig = plot_data(df)
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    dat = plot_data(df)
+    # app.run(host='0.0.0.0', port=PORT, debug=True)
