@@ -57,4 +57,3 @@ if __name__ == '__main__':
         insert_item(item, pred, collection)
         # pause before next iteration of the loop
         time.sleep(time_delta)
-        print k
